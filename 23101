@@ -1,4 +1,7 @@
 
+//Para esta implementación se supone que la páusa de cada actividad tiene una duración constante, lo cual implica una simetría entre
+//el tiempo activo y el tiempo inactivo (pausa), es decir tiempo pausa = tiempo actividad.
+
 //Sea tiempoactividad1 < tiempoactividad2 < ... < tiempoactividadN:
 
 #define actividad1 0
@@ -47,8 +50,8 @@ void loop() {
 }
 
 // -----------  Sub rutinas:
-// Para este ejemplo sólo usamos un sólo tipo de actividad (encender-apagar un determinado led con una respectiva determinada páusa).
-// Obviamente pueden ser x cantidad hasta dónde nos lo permita la capacidad de la memoria flash de la placa arduino utilizada.
+// Para este ejemplo sólo usamos un sólo tipo de actividad, encender-apagar un determinado led, con su respectiva páusa de encendido y apagado).
+// Obviamente pueden ser x cantidad de actividades y sus respecivas pausas, ello dependerá de la capacidad de la memoria flash de la placa arduino utilizada.
 
 void actividadX(int pinLED) {
   if(digitalRead(pinLED))
