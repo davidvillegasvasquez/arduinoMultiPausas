@@ -1,0 +1,58 @@
+
+//Sea tiempoactividad1 < tiempoactividad2 < ... < tiempoactividadN:
+
+#define actividad1 0
+#define actividad2 1
+#define actividadN 2
+
+const unsigned long tiempoactividad1 = 250UL;
+const unsigned long tiempoactividad2 = 2000UL;
+const unsigned long tiempoactividadN = 6000UL;
+
+unsigned long tempo;
+int deltaActividad1, deltaActividad2, deltaActividadN;
+
+unsigned long tiempoAcumactividad1 = 0;
+unsigned long tiempoAcumactividad2 = 0;
+unsigned long tiempoAcumactividadN = 0;
+
+void setup() {
+  pinMode(actividad1, OUTPUT); 
+  pinMode(actividad2, OUTPUT);
+  pinMode(actividadN, OUTPUT);
+  digitalWrite(actividad1, LOW);
+  digitalWrite(actividad2, LOW);
+  digitalWrite(actividadN, LOW);
+}
+
+void loop() {
+  tempo = millis();
+  deltaActividad1 = tempo - tiempoAcumactividad1;
+  deltaActividad2 = tempo - tiempoAcumactividad2;
+  
+   if ((deltaActividad1 >= tiempoActividad1) && (deltaActividad1 < tiempoActividad2)) {
+    actividadX(actividad1);
+    tiempoAcumactividad1 += tiempoactividad1;
+    }
+    else  {
+        if ((deltaActividad2 >= tiempoActividad2) && (deltaActividadN < tiempoActividadN)) {
+            actividadX(actividad2);
+            tiempoAcumactividad2 += tiempoactividad2;
+            }
+            else {
+                actividadX(actividadN);
+                tiempoAcumactividadN += tiempoactividadN;
+                }
+             }
+}
+
+// -----------  Sub rutinas:
+// Para este ejemplo sólo usamos un sólo tipo de actividad (encender-apagar un determinado led con una respectiva determinada páusa).
+// Obviamente pueden ser x cantidad hasta dónde nos lo permita la capacidad de la memoria flash de la placa arduino utilizada.
+
+void actividadX(int pinLED) {
+  if(digitalRead(pinLED))
+    digitalWrite(pinLED, LOW);
+  else
+    digitalWrite(pinLED, HIGH);
+}
